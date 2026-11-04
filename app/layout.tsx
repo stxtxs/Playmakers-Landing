@@ -5,7 +5,7 @@ import { bebasNeue, inter, spaceGrotesk, teko } from "./fonts";
 import "./globals.css";
 
 /** The public origin. */
-export const SITE_URL = "https://playmakers.sportstechx.com";
+export const SITE_URL = "https://www.playmakers.sportstechx.com";
 
 const TITLE = "Playmakers — The private network for high-growth sports tech founders and CEOs";
 const DESCRIPTION =
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "sports tech network", "founder peer group", "sports tech founders",
     "CEO network", "peer advisory", "Playmakers", "SportsTechX",
   ],
-  authors: [{ name: "SportsTechX", url: "https://sportstechx.com" }],
+  authors: [{ name: "SportsTechX", url: "https://www.sportstechx.com" }],
   creator: "SportsTechX",
   publisher: "SportsTechX GmbH",
   category: "business",
