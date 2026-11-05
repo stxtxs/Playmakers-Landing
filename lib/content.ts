@@ -89,10 +89,9 @@ export const nav = {
  * "Investors Circle" is another name for Playmakers and has no page of its own,
  * so both entries share one destination.
  */
-/* TEMPORARY host. The STX site is served from a Vercel preview until it moves
-   back to its own domain — put https://www.sportstechx.com back here when it does.
+/* The STX site (landing repo), on its own domain.
    No trailing slash: the links below append their own paths. */
-export const STX_HOME = 'https://sports-tech-x-landing.vercel.app';
+export const STX_HOME = 'https://www.sportstechx.com';
 
 
 export const hero = {
