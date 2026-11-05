@@ -2,7 +2,7 @@ import { FigmaImage } from '@/components/figma-image';
 import { Art } from '@/components/art';
 import { Lines } from '@/components/lines';
 import { src } from '@/lib/assets';
-import { finalHero } from '@/lib/content';
+import { APPLY_URL, finalHero } from '@/lib/content';
 
 /**
  * Final Hero — 1512x693. Same construction as the intro hero (cover photo, navy
@@ -66,7 +66,7 @@ export function FinalHero() {
       </p>
 
       <a
-        href="https://sportstechx.fillout.com/playmakers-membership"
+        href={APPLY_URL}
         target="_blank"
         rel="noreferrer"
         className="mt-[calc(46*var(--k))] grid h-[calc(54*var(--k))] min-w-[calc(356*var(--k))] place-items-center rounded-full bg-accent px-[calc(32*var(--k))] font-label text-cta font-medium tracking-[0.1em] text-accent-fg shadow-cta transition-transform motion-safe:hover:scale-[1.02]"

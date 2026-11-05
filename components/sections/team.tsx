@@ -62,7 +62,8 @@ export function Team({ members = team.members }: { members?: Member[] }) {
                   goes two-up at lg — so between 768 and 1023 a card has the
                   full column, and stacked that makes the photo a ~691-wide,
                   675-tall slab above four lines of text. */}
-              <article className="team-card flex h-full flex-col overflow-hidden rounded-[calc(16*var(--k))] bg-white md:flex-row">
+              {/* Hover: the same small lift and deeper shadow as the step cards. */}
+              <article className="team-card flex h-full flex-col overflow-hidden rounded-[calc(16*var(--k))] bg-white transition-[translate,box-shadow] duration-300 ease-out hover:shadow-[0_18px_40px_rgb(0_0_0/0.35)] motion-safe:hover:-translate-y-1.5 md:flex-row">
                 {/* 254 of the card's 674 on the artboard; a share rather than a fixed
                     width so it scales with the card. */}
                 {/* The artboard ratio is kept through md and only dropped at lg.

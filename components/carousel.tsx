@@ -244,11 +244,21 @@ export function Carousel({
     const copy = copyWidth.current;
 
     if (autoScroll) {
-      // Continuous-drift path (unchanged): hold the drift, back-wrap only — the
-      // drift loop folds the forward position back under one copy on settle.
+      // Continuous-drift path: hold the drift and wrap BOTH ways before the
+      // step. Forward used to rely on the drift loop folding the position back
+      // under one copy once it settled, but the loop does not fold while the
+      // pointer rests on the arrow (paused). So a press near the end of the
+      // track asked for a position past the end, the browser clamped it, and
+      // "next" sat there until a timer let the loop catch up: the rail
+      // seemed stuck and needed several clicks. The jump is exactly one copy,
+      // so it is invisible.
       paused.current = true;
       if (resumeAt.current) window.clearTimeout(resumeAt.current);
-      if (el.scrollLeft + dir * step < 0) el.scrollLeft += copy;
+      if (looping && copy) {
+        const max = el.scrollWidth - el.clientWidth;
+        if (el.scrollLeft + dir * step < 0) el.scrollLeft += copy;
+        else if (el.scrollLeft + dir * step > max - 1) el.scrollLeft -= copy;
+      }
       el.scrollBy({ left: dir * step, behavior: 'smooth' });
       resumeAt.current = window.setTimeout(() => {
         paused.current = false;

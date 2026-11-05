@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Art } from '@/components/art';
 import { Lines } from '@/components/lines';
 import { src } from '@/lib/assets';
-import { hero } from '@/lib/content';
+import { APPLY_URL, hero } from '@/lib/content';
 
 /**
  * Intro Hero — 1512x1004 on the artboard.
@@ -75,7 +75,9 @@ export function IntroHero() {
         </h1>
 
         <a
-          href="#apply"
+          href={APPLY_URL}
+          target="_blank"
+          rel="noreferrer"
           className="mt-[calc(46*var(--k))] grid h-[calc(54*var(--k))] min-w-[calc(304*var(--k))] place-items-center rounded-full bg-accent px-[calc(32*var(--k))] font-label text-cta font-medium tracking-[0.1em] text-accent-fg shadow-cta transition-transform motion-safe:hover:scale-[1.02]"
         >
           {hero.cta}

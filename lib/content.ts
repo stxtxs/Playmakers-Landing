@@ -19,9 +19,10 @@ import type { FigmaFill } from '@/components/figma-image';
 
 export type Step = {
   n: string;
-  eyebrow: string;
   title: string;
   body: string;
+  /** Optional qualifying list under the body, any one of which is enough. */
+  criteria?: string[];
 };
 
 export type Member = {
@@ -94,14 +95,17 @@ export const nav = {
 export const STX_HOME = 'https://www.sportstechx.com';
 
 
+/** The membership application form. Every "Apply" CTA on the page goes here. */
+export const APPLY_URL = 'https://sportstechx.fillout.com/playmakers-membership';
+
 export const hero = {
   headline: "WHERE SPORTS TECH'S BEST BUILD  SMARTER, FASTER, TOGETHER.",
-  cta: 'BECOME A MEMBER',
+  cta: 'APPLY FOR MEMBERSHIP',
 };
 
 export const trustedBy = {
   title: 'Accelerate your Growth Alongside Elite Operators at Your Level.',
-  lead: 'Playmakers is a by-invitation private network for high growth sports tech founders  and CEOs. Your peers. Your confidants. Your advantage.',
+  lead: 'Playmakers is a curated network for high-growth sports tech founders and CEOs, built on trusted peers, candid advice and shared experience.',
   // FIXME(design): all seven cards carry the same placeholder person, and the
   // caption typography drifts across them (Teko 300/22 on 1-2, Teko 500/18 on
   // 3-7, the role on card 7 is CommitMono where the rest are Space Grotesk).
@@ -243,31 +247,23 @@ export const quote = {
 
 export const howToJoin = {
   title: 'How to Join the Network',
-  cta: 'APPLY NOW',
+  cta: 'APPLY FOR MEMBERSHIP',
   steps: [
     {
       n: '1',
-      eyebrow: 'Founder Eligibility Criteria',
-      title: 'Apply For  Membership',
-      body: 'All members must be the founder or CEO of a sports tech startup doing at least €1M in revenue or having raised €3M+ in funding or have had above a €5M company exit.',
+      title: 'Apply',
+      body: "You're the founder or CEO of a sports tech company with:",
+      criteria: ['$1M+ revenue in the last 12 months', '$3M+ raised', 'A $5M+ exit as a founder'],
     },
     {
       n: '2',
-      eyebrow: 'Founder Alignment CHAT',
-      title: 'Take an  interview call',
-      body: 'If you look like a fit “on paper,” we set up a vetting call. This isn’t a sales pitch - it’s a conversation to hear how you think, what you’re building,  and your energy.',
+      title: 'Interview',
+      body: "A two-way conversation to set expectations. We listen to what you're building and what you're looking for. You hear exactly what we do, and what we don't.",
     },
     {
       n: '3',
-      eyebrow: 'Invitation & Onboarding',
-      title: 'Receive an  invitation to join',
-      body: 'If you meet our criteria for membership, you’ll get the invite and are admitted as a Playmakers member, with new spots opening up at the beginning of every quarter.',
-    },
-    {
-      n: '4',
-      eyebrow: 'Community & Peer Placement',
-      title: 'Become part of  the community',
-      body: 'Once you’ve paid your dues, you’ll get immediate access to our digital community and get placed into your core group within 60 days of joining (it’s curated and can’t be rushed).',
+      title: 'Accept & Join',
+      body: "If everything fits, sign the docs, pay the fee and you're in. Access the member community immediately and expect placement in your core group within 90 days.",
     },
   ] satisfies Step[],
 };
