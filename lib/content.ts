@@ -275,7 +275,7 @@ export const team = {
     {
       name: 'ROHN MALHOTRA',
       role: 'NETWORK INTELLIGENCE',
-      bio: 'Co-Founder & Managing Director at SportsTechX, the leading sports innovation intelligence platform, exited founder and Investment Director at Match Ventures.',
+      bio: 'Exited founder, now Co-Founder & CEO at SportsTechX, the leading sports tech & venture intelligence platform. Also Investment Director at Match Ventures.',
       photo: 'team-1',
       fill: { saturation: 0.09 },
     },
@@ -289,14 +289,14 @@ export const team = {
     {
       name: 'MITCH HEATH',
       role: 'Core Groups Coach',
-      bio: 'Co-Founder and Chief Growth Officer at Teamworks with a track-record of scaling the ‘Operating System for Sports’ from inception in 2006 to unicorn status company.',
+      bio: 'Co-Founder and Chief Growth Officer at Teamworks with a track-record of scaling the ‘Operating System for Sports’ from inception in 2006 to unicorn status.',
       photo: 'team-4',
       fill: { exposure: 0.1, saturation: -0.24 },
     },
     {
       name: 'KATY TROST',
       role: 'Core Groups Coach',
-      bio: 'Executive coach and advisor with over a decade of experience in coaching technology startup founders to become exceptional CEOs  and growth-stage leaders.',
+      bio: 'Executive coach and advisor with over a decade of experience in coaching tech founders become exceptional CEOs and growth-stage leaders.',
       photo: 'team-3',
       fill: {},
     },
