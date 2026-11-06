@@ -412,9 +412,9 @@ export const footer = {
       heading: 'SportsTechX',
       external: true,
       links: [
-        { label: 'SportsTechX.com', href: STX_HOME },
+        { label: 'SportsTechX', href: STX_HOME },
         { label: 'Atlas', href: 'https://www.atlas.sportstechx.com' },
-        { label: 'Boardroom', href: `${STX_HOME}/#solutions` },
+        { label: 'Boardroom', href: `${STX_HOME}/#boardroom` },
         { label: 'Media', href: `${STX_HOME}/#media` },
         { label: 'About', href: `${STX_HOME}/about` },
       ],
