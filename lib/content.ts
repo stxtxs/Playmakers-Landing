@@ -397,23 +397,37 @@ export const footer = {
     'Playmakers is an invite-only, private membership network for high-growth sports tech founders and CEOs to connect, share strategy, and scale together.',
   email: 'hello@playmakers.com',
   location: 'Berlin, Germany',
+  // Same structure as the Atlas footer: this site's own links, then the rest
+  // of the SportsTechX family (the first gets an outbound arrow), then Connect.
   columns: [
     {
       heading: 'Quick Links',
       links: [
         { label: 'Explore Membership', href: '/#membership' },
         { label: 'How to Join', href: '/#how-to-join' },
-        { label: 'About us', href: '/#team' },
         { label: 'FAQ', href: '/#faq' },
         { label: 'Terms of membership', href: '/terms' },
+      ],
+    },
+    {
+      heading: 'SportsTechX',
+      external: true,
+      links: [
+        { label: 'SportsTechX.com', href: STX_HOME },
+        { label: 'Atlas', href: 'https://www.atlas.sportstechx.com' },
+        { label: 'Boardroom', href: `${STX_HOME}/#solutions` },
+        { label: 'Media', href: `${STX_HOME}/#media` },
+        { label: 'About', href: `${STX_HOME}/about` },
       ],
     },
   ],
   // Asset names; <Art> resolves the path and size from design/assets.json.
   // Only the two SportsTechX socials that exist — Instagram and X were removed.
+  // Contact sits here too, as on Atlas, rather than in the left column.
   social: [
     { label: 'LinkedIn', icon: 'icon-linkedin', href: 'https://www.linkedin.com/company/sportstechx/' },
-    { label: 'Youtube', icon: 'icon-youtube', href: 'https://www.youtube.com/@SportsTechX' },
+    { label: 'YouTube', icon: 'icon-youtube', href: 'https://www.youtube.com/@SportsTechX' },
+    { label: 'Contact', icon: 'icon-mail', href: 'mailto:hello@playmakers.com' },
   ],
   legal: '© 2026 SportsTechX GmbH. All rights reserved.',
   meta: 'Privacy · Imprint · The Inner Circle of Sports Tech',
