@@ -168,7 +168,7 @@ export const offers = {
       title: 'SPORTS TECH  INTELLIGENCE',
       paras: [
         {
-          leadIn: 'Pro-Level Access to the SportsTechX Intelligence Hub',
+          leadIn: 'Pro-Level Access to SportsTechX Atlas',
           body: ' providing actionable insights on global sports tech trends and innovation',
         },
         {

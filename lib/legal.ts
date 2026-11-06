@@ -119,7 +119,7 @@ export const termsOfMembership: LegalDoc = {
         {
           kind: 'list',
           items: [
-            { text: 'Pro-level access to the SportsTechX Intelligence Hub' },
+            { text: 'Pro-level access to SportsTechX Atlas' },
             { text: 'Access to proprietary sports tech market research, reports, and insights' },
           ],
         },
@@ -607,7 +607,7 @@ export const termsOfMembership: LegalDoc = {
         { kind: 'p', label: 'SportsTechX GmbH', text: '' },
         { kind: 'p', text: 'Liebigstraße 35, 10247 Berlin' },
         { kind: 'p', label: 'Email:', text: 'rohn@sportstechx.com' },
-        { kind: 'p', text: 'Last updated: December 2025' },
+        { kind: 'p', text: 'Last updated: November 2026' },
       ],
     },
   ],
