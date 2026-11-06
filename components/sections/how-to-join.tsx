@@ -57,7 +57,8 @@ export function HowToJoin() {
                 <p className="mt-[calc(22*var(--k))] font-sans text-body-sm leading-[1.56] text-white">{step.body}</p>
 
                 {step.criteria && (
-                  <ul className="mt-[calc(14*var(--k))] flex flex-col">
+                  // The "or" rows are decorative, so the list names the rule for screen readers.
+                  <ul aria-label="Meet any one of these" className="mt-[calc(14*var(--k))] flex flex-col">
                     {step.criteria.map((c, k) => (
                       <Fragment key={c}>
                         {k > 0 && (

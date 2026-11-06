@@ -295,7 +295,7 @@ export const team = {
     {
       name: 'KATY TROST',
       role: 'Core Groups Coach',
-      bio: 'Executive coach and advisor with over a decade of experience in coaching tech founders become exceptional CEOs and growth-stage leaders.',
+      bio: 'Executive coach and advisor with over a decade of experience in coaching tech founders to become exceptional CEOs and growth-stage leaders.',
       photo: 'team-3',
       fill: {},
     },
@@ -308,7 +308,7 @@ export const team = {
  * Where the rest of the design states a fact, the answer below is taken from it
  * and is accurate: the eligibility criteria come from How-to-Join step 1, the
  * 9x/year core group sessions and the 6-9 group size from the offer card, the
- * quarterly intake from step 3, the 60-day placement from step 4. Those are
+ * 90-day placement from step 3. Those are
  * marked `derived`.
  *
  * The rest are marked `draft` and are INVENTED — written so the accordion has
@@ -336,7 +336,7 @@ export const faq = {
     {
       q: 'What are the requirements to join?',
       // derived: How-to-Join step 1, verbatim criteria
-      a: 'Every member is the founder or CEO of a sports tech startup doing at least €1M in revenue, or having raised €3M+ in funding, or with a company exit above €5M behind them.',
+      a: 'Every member is the founder or CEO of a sports tech startup doing at least $1M in revenue in the last 12 months, or having raised $3M+ in funding, or with a $5M+ exit as a founder behind them.',
     },
     {
       q: 'How much time commitment does Playmakers take?',
@@ -360,13 +360,13 @@ export const faq = {
     },
     {
       q: 'Is Playmakers a digital network or do you meet in person?',
-      // derived in part: "immediate access to our digital community" (step 4)
+      // derived in part: "access the member community immediately" (step 3)
       a: 'Both. The community and the core group sessions run digitally, which is what makes a network this senior possible across markets.',
     },
     {
       q: 'Who will be in my core group?',
-      // derived: 6-9 members, curated, placed within 60 days (offer card + step 4)
-      a: 'Six to nine members at a comparable stage, curated rather than assigned. Placement happens within 60 days of joining — it is deliberate and cannot be rushed.',
+      // derived: 6-9 members, curated, placed within 90 days (offer card + step 3)
+      a: 'Six to nine members at a comparable stage, curated rather than assigned. Placement happens within 90 days of joining — it is deliberate and cannot be rushed.',
     },
     {
       q: "What if I don't connect well with my core group?",
@@ -395,8 +395,6 @@ export const finalHero = {
 export const footer = {
   description:
     'Playmakers is an invite-only, private membership network for high-growth sports tech founders and CEOs to connect, share strategy, and scale together.',
-  // Was the Figma placeholder hello@playmakers.com - a stranger's domain.
-  email: 'hello@sportstechx.com',
   location: 'Berlin, Germany',
   // Same structure as the Atlas footer: this site's own links, then the rest
   // of the SportsTechX family (the first gets an outbound arrow), then Connect.
@@ -428,7 +426,8 @@ export const footer = {
   social: [
     { label: 'LinkedIn', icon: 'icon-linkedin', href: 'https://www.linkedin.com/company/sportstechx/' },
     { label: 'YouTube', icon: 'icon-youtube', href: 'https://www.youtube.com/@SportsTechX' },
-    { label: 'Contact', icon: 'icon-mail', href: 'mailto:hello@playmakers.com' },
+    // hello@playmakers.com (the Figma placeholder) is a stranger's domain.
+    { label: 'Contact', icon: 'icon-mail', href: 'mailto:hello@sportstechx.com' },
   ],
   legal: '© 2026 SportsTechX GmbH. All rights reserved.',
   meta: 'Privacy · Imprint · The Inner Circle of Sports Tech',

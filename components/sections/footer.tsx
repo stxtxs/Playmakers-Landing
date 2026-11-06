@@ -28,7 +28,7 @@ export function Footer() {
               columns pair up. */}
           {/* Brand cell plus three link columns, in the Atlas footer's
               proportions (451 : 200 : 200 : 200). */}
-          <div className="grid gap-y-[calc(48*var(--k))] md:grid-cols-3 md:gap-x-[calc(48*var(--k))] lg:grid-cols-[42.4%_19.2%_19.2%_19.2%] lg:gap-y-0">
+          <div className="grid gap-y-[calc(48*var(--k))] md:grid-cols-3 md:gap-x-[calc(48*var(--k))] lg:grid-cols-[minmax(0,42.4fr)_minmax(0,19.2fr)_minmax(0,19.2fr)_minmax(0,19.2fr)] lg:gap-y-0">
             {/* Left cell — lockup, blurb, location */}
             <div className="md:col-span-3 lg:col-span-1">
               {/* The header's lockup: BY SPORTSTECHX centred under the mark,
