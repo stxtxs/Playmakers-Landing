@@ -44,10 +44,9 @@ const isScrolled = () => {
  * the hero and never came back, and its z-50 was trapped in the hero's
  * `isolate` stacking context.
  *
- * Two values diverge from the artboard, both asked for directly: the resting
- * top offset is 48 rather than 85, and the LOG IN capsule is padded 30 rather
- * than 15 (browser Space Grotesk sets the label ~19px narrower than Figma does,
- * so the artboard's own 15 came out visibly tighter than the design reads).
+ * The bar's measurements follow sportstechx.com rather than the artboard, so
+ * the three sites' headers match: resting offset, page width, pill and button
+ * sizes, and the nav type (see .nav-type in globals.css).
  *
  * Both pills are glass over the hero photograph, not solid fills. Flattening
  * either to an opaque colour is the easy mistake and it kills the effect.
@@ -91,8 +90,11 @@ export function NavBar() {
           : NAV_REST
       )}
     >
-      <div className="container-page flex items-center justify-between gap-[calc(24*var(--k))]">
-        <div className="flex items-center gap-[calc(16*var(--k))]">
+      {/* Desktop: top-aligned, so the pills sit exactly where sportstechx.com's
+          do; the wordmark is nudged down to centre on them, with BY SPORTSTECHX
+          hanging below. */}
+      <div className="nav-shell flex items-center justify-between gap-6 lg:items-start">
+        <div className="flex items-center gap-4">
           {/* Below lg the links live in the drawer, so this is the only way in
               — and the only way out: it flips to an X, so it must NOT be faded
               while the drawer is open. The click-away overlay behind the page
@@ -106,7 +108,7 @@ export function NavBar() {
               this site's home link, and "BY SPORTSTECHX" underneath is the way
               back to sportstechx.com, turning SportsTechX magenta on hover. It
               replaces the standalone S icon that used to sit at the far right. */}
-          <div className="flex flex-col items-center gap-[6px] lg:gap-2">
+          <div className="flex flex-col items-center gap-[6px] lg:mt-[11px] lg:gap-2">
           <a
             href="/#top"
             aria-label="Playmakers — back to top"
@@ -132,16 +134,19 @@ export function NavBar() {
           </div>
         </div>
 
-        <div className="flex items-center gap-[calc(24*var(--k))]">
+        {/* Pill and LOG IN sized as on sportstechx.com: 50px tall, 1.5px
+            borders, 20px inside the pill, 16/36px between links, 15px inside
+            the button, 20px between the two. */}
+        <div className="flex items-center gap-5">
           <nav
             aria-label="Primary"
-            className="hidden h-[50px] items-center gap-[calc(36*var(--k))] rounded-full border-[1.5px] border-white/100 bg-white/10 px-[calc(35*var(--k))] shadow-nav backdrop-blur-sm lg:flex"
+            className="hidden h-[50px] items-center gap-4 rounded-full border-[1.5px] border-white/100 bg-white/10 px-5 shadow-nav backdrop-blur-sm lg:flex xl:gap-9"
           >
             {nav.links.map((l) => (
               <a
                 key={l.label}
                 href={l.href}
-                className="font-label text-label font-medium tracking-[0.1em] text-white transition-colors duration-[80ms] ease-out hover:text-accent active:opacity-70"
+                className="nav-type text-white transition-colors duration-[80ms] ease-out hover:text-accent active:opacity-70"
               >
                 {l.label}
               </a>
@@ -153,15 +158,15 @@ export function NavBar() {
             className={cn(
               // Desktop-only, as on sportstechx.com: the drawer carries it on a
               // phone, and the full wordmark leaves no room for it there.
-              'hidden h-[50px] min-h-[44px] place-items-center rounded-full border-[1.5px] border-accent bg-accent/5 px-[calc(30*var(--k))] lg:grid',
-              'font-label text-label font-medium tracking-[0.1em] text-accent backdrop-blur-[28px]',
+              'hidden h-[50px] place-items-center rounded-full border-[1.5px] border-accent bg-accent/5 px-[15px] lg:grid',
+              'text-accent backdrop-blur-[28px]',
               'transition-[background-color,color,scale] duration-200 ease-out hover:bg-accent hover:text-accent-fg motion-safe:hover:scale-105 motion-safe:active:scale-95',
               // On a phone the drawer already carries it; two copies of the
               // same control either side of the slide reads as a duplicate.
               drawerOpen && 'opacity-0'
             )}
           >
-            {nav.cta.label}
+            <span className="nav-type">{nav.cta.label}</span>
           </a>
 
         </div>

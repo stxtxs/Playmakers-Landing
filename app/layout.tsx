@@ -53,6 +53,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${teko.variable} ${inter.variable} ${spaceGrotesk.variable} ${bebasNeue.variable} h-full antialiased`}
     >
+      <head>
+        {/* Adobe Fonts kit jyx6vei (New Frank), shared with sportstechx.com and
+            Atlas. Only the header uses it, so the three bars set the same type;
+            Space Grotesk stands in if the kit does not load. */}
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+        <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
+        <link rel="stylesheet" href="https://use.typekit.net/jyx6vei.css" />
+      </head>
       {/* --k is what makes the page a scale drawing of the 1512 artboard.
           It needs two elements, not one: the body is the query container and
           the div reads it. A container cannot query itself. See globals.css. */}
