@@ -102,11 +102,11 @@ export function NavBar() {
               while the drawer is open. */}
           <MobileMenuButton className="lg:hidden" />
 
-          {/* The lockup shared by Playmakers and Atlas: the product wordmark is
+          {/* The lockup shared by Playmakers and Atlas, centred: the product wordmark is
               this site's home link, and "BY SPORTSTECHX" underneath is the way
               back to sportstechx.com, turning SportsTechX magenta on hover. It
               replaces the standalone S icon that used to sit at the far right. */}
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-center gap-[6px] lg:gap-2">
           <a
             href="/#top"
             aria-label="Playmakers — back to top"
@@ -125,7 +125,7 @@ export function NavBar() {
             rel="noreferrer"
             // Padding widens the tap area without moving the text; the negative
             // margin gives the space back so the lockup stays tight.
-            className="-my-1.5 py-1.5 font-[family-name:var(--font-bebas-neue)] text-[13px] leading-none tracking-[0.12em] text-white/60 transition-colors duration-200 ease-out hover:text-[#ed1a5e] lg:text-[14px]"
+            className="-my-1.5 py-1.5 font-[family-name:var(--font-bebas-neue)] text-[15px] leading-none tracking-[0.12em] text-white/60 transition-colors duration-200 ease-out hover:text-[#ed1a5e] lg:text-[17px]"
           >
             BY SPORTSTECHX ↗
           </a>
