@@ -1,7 +1,6 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
-import { Art } from '@/components/art';
 import { MobileMenuButton, useMobileMenu } from '@/components/mobile-menu';
 import { nav, STX_HOME } from '@/lib/content';
 import { cn } from '@/lib/utils';
@@ -103,6 +102,11 @@ export function NavBar() {
               while the drawer is open. */}
           <MobileMenuButton className="lg:hidden" />
 
+          {/* The lockup shared by Playmakers and Atlas: the product wordmark is
+              this site's home link, and "BY SPORTSTECHX" underneath is the way
+              back to sportstechx.com, turning SportsTechX magenta on hover. It
+              replaces the standalone S icon that used to sit at the far right. */}
+          <div className="flex flex-col items-start">
           <a
             href="/#top"
             aria-label="Playmakers — back to top"
@@ -115,6 +119,17 @@ export function NavBar() {
             {/* eslint-disable-next-line @next/next/no-img-element -- SVG; next/image does not optimise it */}
             <img src="/vectors/wordmark-hero.svg" alt="Playmakers" className="h-6 w-auto lg:h-7" />
           </a>
+          <a
+            href={STX_HOME}
+            target="_blank"
+            rel="noreferrer"
+            // Padding widens the tap area without moving the text; the negative
+            // margin gives the space back so the lockup stays tight.
+            className="-my-1.5 py-1.5 font-[family-name:var(--font-bebas-neue)] text-[13px] leading-none tracking-[0.12em] text-white/60 transition-colors duration-200 ease-out hover:text-[#ed1a5e] lg:text-[14px]"
+          >
+            BY SPORTSTECHX ↗
+          </a>
+          </div>
         </div>
 
         <div className="flex items-center gap-[calc(24*var(--k))]">
@@ -126,7 +141,7 @@ export function NavBar() {
               <a
                 key={l.label}
                 href={l.href}
-                className="font-label text-label font-medium tracking-[0.1em] text-white transition-opacity hover:opacity-70"
+                className="font-label text-label font-medium tracking-[0.1em] text-white transition-colors duration-[80ms] ease-out hover:text-accent active:opacity-70"
               >
                 {l.label}
               </a>
@@ -139,7 +154,8 @@ export function NavBar() {
               // Desktop-only, as on sportstechx.com: the drawer carries it on a
               // phone, and the full wordmark leaves no room for it there.
               'hidden h-[50px] min-h-[44px] place-items-center rounded-full border-[1.5px] border-accent bg-accent/5 px-[calc(30*var(--k))] lg:grid',
-              'font-label text-label font-medium tracking-[0.1em] text-accent backdrop-blur-[28px] transition-colors hover:bg-accent/15',
+              'font-label text-label font-medium tracking-[0.1em] text-accent backdrop-blur-[28px]',
+              'transition-[background-color,color,scale] duration-200 ease-out hover:bg-accent hover:text-accent-fg motion-safe:hover:scale-105 motion-safe:active:scale-95',
               // On a phone the drawer already carries it; two copies of the
               // same control either side of the slide reads as a duplicate.
               drawerOpen && 'opacity-0'
@@ -148,16 +164,6 @@ export function NavBar() {
             {nav.cta.label}
           </a>
 
-          {/* The way back to sportstechx.com, in the bar rather than behind a
-              hamburger. Last in the row, after the CTA, on every site. */}
-          <a
-            href={STX_HOME}
-            aria-label="SportsTechX"
-            className="grid size-[38px] shrink-0 place-items-center transition-[opacity,scale] hover:scale-105 hover:opacity-80"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element -- fixed-size bitmap mark */}
-            <img src="/stx-s-white.png" alt="" className="h-9 w-auto" />
-          </a>
         </div>
       </div>
     </header>
