@@ -58,8 +58,15 @@ export function TrustedBy({
           {/* 210 artboard px is an 88px stamp once --k floors at 0.42, so the
               card width carries a floor of its own and the photo follows by
               aspect-ratio rather than a second frozen length. */}
+          {/* Desktop: a hairline before every card, centred in the gap, as on
+              sportstechx.com and Atlas. Drawn as the card's ::before rather than
+              as its own flex item, so the carousel's one-card step (measured
+              card to card) is unaffected. */}
           {members.map((m, i) => (
-            <article key={i} className="w-[max(160px,calc(210*var(--k)))] shrink-0 snap-start text-center">
+            <article
+              key={i}
+              className="relative w-[max(160px,calc(210*var(--k)))] shrink-0 snap-start text-center lg:before:absolute lg:before:top-1/2 lg:before:left-[calc(-37*var(--k))] lg:before:h-[calc(264*var(--k))] lg:before:w-px lg:before:-translate-y-1/2 lg:before:bg-[#b6b6b6] lg:before:content-['']"
+            >
               <div className="relative aspect-[210/232] w-full overflow-hidden rounded-[max(6px,calc(6*var(--k)))]">
                 <Image src={src(m.photo, 'member-1')} alt={m.name} fill sizes="210px" className="object-cover" />
                 {/* A flat dim across the whole photo. The logos that go over
