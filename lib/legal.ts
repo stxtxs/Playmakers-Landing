@@ -119,7 +119,7 @@ export const termsOfMembership: LegalDoc = {
         {
           kind: 'list',
           items: [
-            { text: 'Pro-level access to SportsTechX Atlas' },
+            { text: 'Access to Atlas Raise (SportsTechX Atlas)' },
             { text: 'Access to proprietary sports tech market research, reports, and insights' },
           ],
         },
