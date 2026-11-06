@@ -400,7 +400,8 @@ export const finalHero = {
 export const footer = {
   description:
     'Playmakers is an invite-only, private membership network for high-growth sports tech founders and CEOs to connect, share strategy, and scale together.',
-  email: 'hello@playmakers.com',
+  // Was the Figma placeholder hello@playmakers.com - a stranger's domain.
+  email: 'hello@sportstechx.com',
   location: 'Berlin, Germany',
   columns: [
     {
