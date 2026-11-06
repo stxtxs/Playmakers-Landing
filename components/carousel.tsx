@@ -347,25 +347,28 @@ export function Carousel({
           caller wants them held in place. */}
       {(alwaysShowArrows || !(atStart && atEnd && !looping)) && (
         <>
+          {/* Each arrow moves the cards the way it points: left slides the rail
+              left (on to later cards), right slides it right (back to earlier
+              ones). The same on all three sites. */}
           <Arrow
             side="left"
-            arrow={arrow}
-            disabled={!looping && atStart}
-            onClick={() => page(-1)}
-            onHold={pause}
-            onRelease={resume}
-            className={arrowClassName}
-            label={`${label}: previous`}
-          />
-          <Arrow
-            side="right"
             arrow={arrow}
             disabled={!looping && atEnd}
             onClick={() => page(1)}
             onHold={pause}
             onRelease={resume}
             className={arrowClassName}
-            label={`${label}: next`}
+            label={`${label}: move left`}
+          />
+          <Arrow
+            side="right"
+            arrow={arrow}
+            disabled={!looping && atStart}
+            onClick={() => page(-1)}
+            onHold={pause}
+            onRelease={resume}
+            className={arrowClassName}
+            label={`${label}: move right`}
           />
         </>
       )}
