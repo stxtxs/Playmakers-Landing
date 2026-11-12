@@ -40,6 +40,24 @@ function flexItems(track: HTMLElement): HTMLElement[] {
   return out;
 }
 
+/**
+ * Scroll position of the card `dir` steps from the one nearest the snap edge.
+ *
+ * Absolute, not a relative scrollBy: offsetLeft is a whole pixel while the real
+ * stride is often fractional (half-width cards), and Safari's snap settles where
+ * it is told, so relative steps carried the rounding forward — the testimonials
+ * crept a pixel every other step until both quotes were cut off at the edges.
+ * `a`/`b` are the first two cards. Same helper as the STX landing carousel.
+ */
+function cardEdge(track: HTMLElement, a: HTMLElement, b: HTMLElement | undefined, dir: 1 | -1): number {
+  const ra = a.getBoundingClientRect();
+  const stride = b ? b.getBoundingClientRect().left - ra.left : ra.width;
+  const pad = parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0;
+  // The scroll position at which the first card sits on the snap edge.
+  const base = track.scrollLeft + ra.left - (track.getBoundingClientRect().left + pad);
+  return base + (Math.round((track.scrollLeft - base) / stride) + dir) * stride;
+}
+
 export function Carousel({
   children,
   className,
@@ -272,13 +290,11 @@ export function Carousel({
       if (el.scrollLeft + dir * step < 0) el.scrollLeft += copy;
       else if (el.scrollLeft + dir * step > el.scrollWidth - el.clientWidth) el.scrollLeft -= copy;
     }
-    // Land on an absolute card boundary, not a relative scrollBy. offsetLeft
-    // is a whole pixel while the real stride is fractional (a 1/2-width card),
-    // and Safari's snap settles where it is told, so relative steps carried
-    // the rounding forward — the testimonials crept a pixel every other step
-    // until both quotes were cut off at the edges.
-    const exact = a && b ? b.getBoundingClientRect().left - a.getBoundingClientRect().left : step;
-    el.scrollTo({ left: (Math.round(el.scrollLeft / exact) + dir) * exact, behavior: 'smooth' });
+    if (!a) {
+      el.scrollBy({ left: dir * step, behavior: 'smooth' });
+      return;
+    }
+    el.scrollTo({ left: cardEdge(el, a, b, dir), behavior: 'smooth' });
   }, [autoScroll, looping]);
 
   // Discrete auto-advance: page forward one card on a timer, pausing on
