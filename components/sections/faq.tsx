@@ -30,7 +30,8 @@ function Answer({ blocks }: { blocks: string[] }) {
 }
 
 /**
- * FAQ — 1513x1136, cream, a 652-wide column of 12 rows.
+ * FAQ — 1513x1136, cream, a column of 12 rows: 920 wide (the artboard drew 652;
+ * widened on request, Nov 2026, as the real answers run long).
  *
  * Native <details>/<summary>, no JavaScript: keyboard handling, screen-reader
  * semantics and browser find-in-page opening the matching row all come free,
@@ -57,7 +58,7 @@ export function Faq() {
           {faq.title}
         </h2>
 
-        <div className="mx-auto mt-[calc(120*var(--k))] lg:max-w-[calc(652*var(--k))]">
+        <div className="mx-auto mt-[calc(120*var(--k))] lg:max-w-[calc(920*var(--k))]">
           {faq.items.map(({ q, a }) => (
             <details
               key={q}

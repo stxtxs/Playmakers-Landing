@@ -100,6 +100,13 @@
    * above it ran full-bleed. */
   --page-inset: calc(107 * var(--k));
 
+  /* What of the "Accelerate your Growth" section must show above the fold under
+   * the desktop hero: its trimmed top padding, the one-line heading and the
+   * two-line lead (Teko 55 x 0.95 at lh 1.25; Inter 21 at lh 1.48), plus air
+   * below. Sized from the type, floors included, so the lead is never cut by the
+   * fold mid-line — a fixed 82svh did exactly that once the lead grew a line. */
+  --hero-peek: calc(86 * var(--k) + max(35px, calc(65.3 * var(--k))) + 2 * max(23.7px, calc(31.1 * var(--k))));
+
   /* ── the scale model ──
    * ONE artboard exists: 1512 wide. Everything on it is drawn in artboard
    * pixels, and the whole composition should keep its proportions at any

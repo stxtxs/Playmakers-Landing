@@ -12,7 +12,7 @@ import { APPLY_URL, hero } from '@/lib/content';
  * whose call to action sits below the fold on the most common desktop size is
  * not doing its job.
  *
- * On desktop it is deliberately shorter than the viewport (`lg:min-h-[76svh]`)
+ * On desktop it is deliberately shorter than the viewport by `--hero-peek`
  * so the "Accelerate your Growth…" section below — its heading AND its lead line —
  * peeks above the fold and invites a scroll (the full-screen hero read as the
  * whole page, feedback Oct 2026). That section's own top padding is trimmed on
@@ -36,7 +36,7 @@ import { APPLY_URL, hero } from '@/lib/content';
 export function IntroHero() {
   return (
     <section
-      className="noise relative isolate flex min-h-[min(100svh,max(560px,calc(1004*var(--k))))] lg:min-h-[82svh] flex-col items-center justify-center overflow-hidden bg-hero px-[calc(16*var(--k))] pt-[calc(88*var(--k))] text-center"
+      className="noise relative isolate flex min-h-[min(100svh,max(560px,calc(1004*var(--k))))] lg:min-h-[calc(100svh-var(--hero-peek))] flex-col items-center justify-center overflow-hidden bg-hero px-[calc(16*var(--k))] pt-[calc(88*var(--k))] text-center"
       style={{ '--noise-alpha': 0.16 } as React.CSSProperties}
     >
       {/* 0.41 fill-opacity on the artboard, over the frame's navy. */}
