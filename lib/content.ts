@@ -332,7 +332,7 @@ export const faq = {
         '**Member Events** – Online and in-person gatherings that go beyond surface-level networking and turn your peers into partners. From private member dinners to Playmakers hosted events around major sports tech conferences and sporting moments.',
         '**Curated Introductions** – Direct connections to other members, investors, and key sports industry stakeholders, leveraging the collective network of the core team and members.',
         '**Digital Community** – Continuous peer-to-peer exchange of best operator knowledge and strategic playbooks in sports tech. Daily access to the minds of sports tech founders and CEOs who speak your language.',
-        "**Atlas Raise Access** – Your intelligence edge in sports tech fundraising. Identify relevant investors, strengthen your pitch and close your next round faster, powered by sports tech's deepest dataset",
+        "**Atlas Raise Access** – Your intelligence edge in sports tech fundraising. Identify relevant investors, strengthen your pitch and close your next round faster, powered by sports tech's deepest dataset.",
         "In short: Core Group, Network, Sports Tech Intelligence. Everything designed to help you scale faster with people who get what you're building.",
       ],
     },
