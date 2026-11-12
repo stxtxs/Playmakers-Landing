@@ -171,6 +171,17 @@
   --fs-eyebrow: max(11px, calc(10 * var(--k))); /* step card label, Space Grotesk 400/10 */
 }
 
+/* The hero peek, continued (see --hero-peek above). Below 1280 wide the lead
+ * wraps to a third line; below 760 tall the hero, its call to action and a
+ * full peek do not fit together, so the hero takes the whole screen and nothing
+ * half-shows under it. */
+@media (max-width: 1279.98px) {
+  .page-rig { --hero-peek: calc(86 * var(--k) + max(35px, calc(65.3 * var(--k))) + 3 * max(23.7px, calc(31.1 * var(--k)))); }
+}
+@media (max-height: 759.98px) {
+  .page-rig { --hero-peek: 0px; }
+}
+
 /* Below the desktop layout the page stops being a scale drawing.
  *
  * --k floors at 0.42, which binds at a 635px viewport, so every artboard-derived
