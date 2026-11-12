@@ -1,5 +1,33 @@
+import { Fragment, type ReactNode } from 'react';
 import { faq } from '@/lib/content';
 import { Art } from '@/components/art';
+
+/** `**bold**` spans inside one answer block. */
+function inline(text: string): ReactNode {
+  return text.split(/\*\*(.+?)\*\*/).map((part, i) =>
+    i % 2 ? <strong key={i} className="font-semibold text-black/85">{part}</strong> : <Fragment key={i}>{part}</Fragment>
+  );
+}
+
+/** Answer blocks -> paragraphs, with consecutive "• " blocks gathered into one list. */
+function Answer({ blocks }: { blocks: string[] }) {
+  const out: ReactNode[] = [];
+  for (let i = 0; i < blocks.length; i++) {
+    if (blocks[i].startsWith('• ')) {
+      const items: string[] = [];
+      while (i < blocks.length && blocks[i].startsWith('• ')) items.push(blocks[i++].slice(2));
+      i--;
+      out.push(
+        <ul key={i} className="flex list-disc flex-col gap-[calc(6*var(--k))] pl-[1.2em]">
+          {items.map((it) => <li key={it}>{inline(it)}</li>)}
+        </ul>
+      );
+    } else {
+      out.push(<p key={i}>{inline(blocks[i])}</p>);
+    }
+  }
+  return <>{out}</>;
+}
 
 /**
  * FAQ — 1513x1136, cream, a 652-wide column of 12 rows.
@@ -44,9 +72,9 @@ export function Faq() {
                 />
               </summary>
 
-              <p className="pt-[calc(14*var(--k))] pr-[calc(44*var(--k))] font-sans text-body leading-[1.6] text-black/70">
-                {a}
-              </p>
+              <div className="flex flex-col gap-[calc(12*var(--k))] pt-[calc(14*var(--k))] pr-[calc(44*var(--k))] font-sans text-body leading-[1.6] text-black/70">
+                <Answer blocks={a} />
+              </div>
             </details>
           ))}
         </div>

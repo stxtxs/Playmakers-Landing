@@ -276,5 +276,15 @@ export const memberDirectory = {
     linkedin: 'https://www.linkedin.com/in/jeremy-steele-a9101926/',
     website: 'https://controlbionics.com/',
   },
+  {
+    name: 'VLADA MUSVYDAITĖ-VILČIAUSKĖ',
+    photo: '/members/vlada-musvydaite-vilciauske.jpg',
+    role: 'FOUNDER AND CEO',
+    company: 'Walk15',
+    blurb:
+      'Sustainable initiative platform built on the idea that every step counts. Helps people and companies move more through fun step and bike challenges, rewarding users with discounts on everyday essentials. Used by more than 1.4 million people and 2,500+ companies.',
+    linkedin: 'https://www.linkedin.com/in/vlada-musvydaite',
+    website: 'https://www.walk15.app/en',
+  },
   ] satisfies DirectoryMember[],
 };

@@ -10,20 +10,20 @@ import { testimonials, type Story } from '@/lib/content';
  * is a 2-up with a 130 gutter, and the arrows sit right out at the section edges
  * (x34 and x1459) rather than beside the text.
  *
- * The widths matter more than they look. At `w-1/2` plus a gap the two items
- * come to 100% + the gap, which leaves the rail a sliver of scroll — just
- * enough to keep the arrows enabled with nothing to page to, which reads as a
- * broken carousel. Sizing each item to `(100% - gutter) / 2` makes two items
- * exactly fill the rail, so the arrows take themselves away until there is a
- * third story to scroll to.
+ * At lg each story is exactly half the rail with the gutter as its own inner
+ * padding, and the track has no gap — the STX landing's testimonials, built the
+ * same way. The earlier `(100% - gutter) / 2` width plus a 130 gap put every
+ * auto-advance step on a fractional scroll position; Safari settled those a
+ * few pixels off the snap point, so the pair drifted until both quotes were
+ * cut off at the edges. Halves of the rail land on whole card edges every time.
  */
 export function Testimonials({ items = testimonials.items }: { items?: Story[] }) {
   return (
     <section className="bg-page py-[calc(98*var(--k))]">
       <div className="container-page">
-        <p className="text-center font-label text-label leading-[1.25] tracking-[0.1em] text-black uppercase">
+        <h2 className="text-center font-label text-label leading-[1.25] tracking-[0.1em] text-black uppercase">
           {testimonials.eyebrow}
-        </p>
+        </h2>
 
         <Carousel
           label="Testimonials"
@@ -45,7 +45,7 @@ export function Testimonials({ items = testimonials.items }: { items?: Story[] }
           // scrollLeft 0 otherwise hands the gesture to the browser's
           // back-navigation. The members rail gets this from the autoScroll
           // branch in Carousel; this one does not.
-          trackClassName="gap-[16px] overscroll-x-contain px-(--page-inset) scroll-px-(--page-inset) lg:gap-[calc(130*var(--k))] lg:px-0 lg:scroll-px-0"
+          trackClassName="gap-[16px] overscroll-x-contain px-(--page-inset) scroll-px-(--page-inset) lg:gap-0 lg:px-0 lg:scroll-px-0"
           // Hidden below lg, matching the sibling site. The peeking next quote
           // (see the card width) is what replaces them as the swipe affordance.
           arrowClassName="hidden text-black lg:grid"
@@ -64,7 +64,7 @@ export function Testimonials({ items = testimonials.items }: { items?: Story[] }
               // justify-between pins the avatar/name to the bottom of the
               // (equal-height) card, so it holds ONE fixed position regardless of
               // quote length — a short quote just leaves a gap above it.
-              className="flex w-[calc(100%-44px)] shrink-0 snap-start flex-col justify-between text-center lg:w-[calc((100%-130*var(--k))/2)]"
+              className="flex w-[calc(100%-44px)] shrink-0 snap-start flex-col justify-between text-center lg:w-1/2 lg:px-[calc(65*var(--k))]"
             >
               <blockquote className="mx-auto lg:max-w-[calc(563*var(--k))] font-sans text-quote-sm leading-[1.42] text-black">
                 {t.quote}

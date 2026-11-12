@@ -285,5 +285,21 @@
     "node": "9072:588",
     "w": 1350,
     "h": 583
+  },
+  "offer-card-2-photo": {
+    "file": "/images/offer-card-2-photo.webp",
+    "node": "manual",
+    "ref": "notion:networking.jpg",
+    "w": 434,
+    "h": 642,
+    "bytes": 45730
+  },
+  "offer-card-3-photo": {
+    "file": "/images/offer-card-3-photo.webp",
+    "node": "manual",
+    "ref": "notion:intelligence.jpg",
+    "w": 434,
+    "h": 642,
+    "bytes": 49044
   }
 }

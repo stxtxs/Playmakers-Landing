@@ -89,11 +89,17 @@ export function MembershipDeck({ cards }: { cards: Offer[] }) {
                   className="absolute inset-y-0 right-0 -z-10 hidden w-[calc(434*var(--k))] opacity-[0.61] lg:block"
                   // SOFT_LIGHT at 0.61 on the artboard. Without the blend the
                   // photo sits on the card as a hard rectangle instead of
-                  // sinking into the gradient behind it.
-                  style={{ mixBlendMode: 'soft-light' }}
+                  // sinking into the gradient behind it. The left edge fades
+                  // out: the artboard's photo has that fade baked in, the later
+                  // per-card photos do not, and a hard edge shows through the
+                  // blend as a seam down the card.
+                  style={{
+                    mixBlendMode: 'soft-light',
+                    maskImage: 'linear-gradient(to right, transparent, #000 28%)',
+                  }}
                 >
                   <Image
-                    src={src('offer-card-photo')}
+                    src={src(card.photo)}
                     alt=""
                     fill
                     sizes="434px"

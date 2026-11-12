@@ -21,7 +21,8 @@ export type Step = {
   n: string;
   title: string;
   body: string;
-  /** Optional qualifying list under the body, any one of which is enough. */
+  /** Optional qualifying list under the body, any one of which is enough —
+   *  rendered with a trailing "or" on every item but the last. */
   criteria?: string[];
 };
 
@@ -64,7 +65,15 @@ export type Offer = {
    */
   paras: { leadIn: string; body: string }[];
   bullets: string[];
+  /** Mood photo on the card's right, an asset name from design/assets.json. */
+  photo: string;
 };
+
+/**
+ * An FAQ answer as blocks: each string is a paragraph, a string starting with
+ * "• " is a bullet (consecutive ones form one list), and **text** is bold.
+ */
+export type FaqItem = { q: string; a: string[] };
 
 export const nav = {
   // FIXME(design): reads "EXPLORE¬ MEMBERSHIP" in Figma. U+00AC is a stray
@@ -104,7 +113,7 @@ export const hero = {
 
 export const trustedBy = {
   title: 'Accelerate your Growth Alongside Elite Operators at Your Level.',
-  lead: 'Playmakers is a curated network for high-growth sports tech founders and CEOs, built on trusted peers, candid advice and shared experience.',
+  lead: 'Playmakers is a curated network for high-growth sports tech founders and CEOs, built on trusted peer advice, decision-maker connections and shared sports industry know-how.',
   // FIXME(design): all seven cards carry the same placeholder person, and the
   // caption typography drifts across them (Teko 300/22 on 1-2, Teko 500/18 on
   // 3-7, the role on card 7 is CommitMono where the rest are Space Grotesk).
@@ -141,6 +150,7 @@ export const offers = {
         'Scale faster with advice from leaders who have navigated complex growth',
         'Stay mentally resilient with a circle that understands your journey',
       ],
+      photo: 'offer-card-photo',
     },
     {
       n: '2',
@@ -161,6 +171,7 @@ export const offers = {
         'Grow your personal profile and visibility to top leaders in sports',
         'Gain access to new partners, markets and investment to accelerate business growth',
       ],
+      photo: 'offer-card-2-photo',
     },
     {
       n: '3',
@@ -169,7 +180,7 @@ export const offers = {
       paras: [
         {
           leadIn: 'Atlas Raise Access',
-          body: ' providing actionable insights on global sports tech trends and innovation',
+          body: ". Your intelligence edge in sports tech fundraising. Identify relevant investors, strengthen your pitch and close your next round faster, powered by sports tech's deepest dataset.",
         },
         {
           leadIn: 'Digital Community',
@@ -181,12 +192,13 @@ export const offers = {
         'Inform your strategy with world-class sports tech market data and research',
         'Leverage insider expertise to obtain a competitive advantage',
       ],
+      photo: 'offer-card-3-photo',
     },
   ] satisfies Offer[],
 };
 
 export const testimonials = {
-  eyebrow: 'PLAYMAKERS TESTIMONIALS',
+  eyebrow: 'What Our Members Say',
   /**
    * FIXME(design): the artboard has two cards carrying the same placeholder
    * quote and person. The first two below are that, verbatim.
@@ -250,19 +262,19 @@ export const howToJoin = {
   steps: [
     {
       n: '1',
-      title: 'Apply',
-      body: "You're the founder or CEO of a sports tech company with:",
-      criteria: ['$1M+ revenue in the last 12 months', '$3M+ raised', 'A $5M+ exit as a founder'],
+      title: 'Apply for membership',
+      body: 'All members must be the founder or CEO of a sports tech company',
+      criteria: ['doing at least $1M in revenue', 'having raised $3M+ in funding', 'have had above a $5M company exit.'],
     },
     {
       n: '2',
-      title: 'Interview',
-      body: "A two-way conversation to set expectations. We listen to what you're building and what you're looking for. You hear exactly what we do, and what we don't.",
+      title: 'Take an interview call',
+      body: "A two-way conversation to assess mutual fit and set expectations. We listen to what you're building and what would make membership most valuable for you and your business. You hear exactly what we do, and what we don't.",
     },
     {
       n: '3',
-      title: 'Accept & Join',
-      body: "If everything fits, sign the docs, pay the fee and you're in. Access the member community immediately and expect placement in your core group within 90 days.",
+      title: 'Join the network',
+      body: "When the fit is right, you'll receive an invitation to join. Once you've signed the membership agreement and completed your first-year dues, you get immediate access to our digital community. Your core group placement follows within 60 days.",
     },
   ] satisfies Step[],
 };
@@ -303,87 +315,115 @@ export const team = {
 };
 
 /**
- * The artboard draws every row collapsed, so it contains no answers at all.
- *
- * Where the rest of the design states a fact, the answer below is taken from it
- * and is accurate: the eligibility criteria come from How-to-Join step 1, the
- * 9x/year core group sessions and the 6-9 group size from the offer card, the
- * 90-day placement from step 3. Those are
- * marked `derived`.
- *
- * The rest are marked `draft` and are INVENTED — written so the accordion has
- * something to open while the real copy is collected. They are plausible, which
- * makes them dangerous: they read as fact and are not. Get them replaced before
- * this is public.
- *
- * The cost answer deliberately quotes no number. Do not let one be guessed into
- * it — an invented price on a real membership page is the one mistake here that
- * could actually cost somebody something.
+ * Answers are the ones on joinplaymakers.co, word for word, with one deliberate
+ * change: where that page names "SportsTechX Intelligence Hub" (Pro-level
+ * access), this one says Atlas Raise access — the membership now includes Atlas
+ * Raise, and the offer cards above say so. Prices and criteria stay in euros as
+ * the source has them.
  */
 export const faq = {
   title: 'Frequently Asked Questions',
   items: [
     {
       q: "What's included in Playmakers membership?",
-      // derived: the three offer cards
-      a: 'Three things. A confidential core group of 6-9 founders that meets nine times a year with professional facilitation; an insider network across the sports industry; and the sports tech intelligence that comes out of both.',
+      a: [
+        'Your Playmakers membership includes:',
+        '**Core Group** – A curated group of 6-9 Playmakers members who meet 9 times per year with professional facilitation. This is your personal board of advisors—the strategic guidance of a high-caliber advisory board without the six-figure cost or time drain.',
+        '**Member Events** – Online and in-person gatherings that go beyond surface-level networking and turn your peers into partners. From private member dinners to Playmakers hosted events around major sports tech conferences and sporting moments.',
+        '**Curated Introductions** – Direct connections to other members, investors, and key sports industry stakeholders, leveraging the collective network of the core team and members.',
+        '**Digital Community** – Continuous peer-to-peer exchange of best operator knowledge and strategic playbooks in sports tech. Daily access to the minds of sports tech founders and CEOs who speak your language.',
+        '**Atlas Raise Access** – SportsTechX Atlas Raise, providing actionable insights on global sports tech trends, market data, and competitive intelligence specific to the intersection of sports and technology.',
+        "In short: Core Group, Network, Intelligence. Everything designed to help you scale faster with people who get what you're building.",
+      ],
     },
     {
       q: 'How much does it cost?',
-      // draft — and no figure, deliberately. See the note above.
-      a: 'Pricing is shared on the alignment call, once we both know the fit is right.',
+      a: [
+        'Annual membership is €6,000.',
+        'That covers everything: the core group sessions with professional facilitation, curated network introductions, member events, and SportsTechX Atlas Raise access. All prices exclude VAT.',
+      ],
     },
     {
       q: 'What are the requirements to join?',
-      // derived: How-to-Join step 1, verbatim criteria
-      a: 'Every member is the founder or CEO of a sports tech startup doing at least $1M in revenue in the last 12 months, or having raised $3M+ in funding, or with a $5M+ exit as a founder behind them.',
+      a: [
+        'To join, you must:',
+        '• Meet our financial criteria for membership: €1M+ in revenue, OR €3M+ in funding, OR a previous €5M+ exit.',
+        '• Be building in sports tech — so you share the same market dynamics, customer challenges, and industry context.',
+        '• Have been vetted for culture fit — specifically courtesy, discretion, and commitment to contributing to the success of fellow members in the network. We enforce a strict "no assholes" policy.',
+      ],
     },
     {
       q: 'How much time commitment does Playmakers take?',
-      // derived: 9x/year sessions from the offer card
-      a: 'Nine core group sessions a year, roughly monthly. Everything else — the network, the introductions, the intelligence — you use at whatever pace suits you.',
+      a: [
+        "Core groups meet approximately monthly for 2 hours, 9 times per year. Beyond that, you engage as much as you want—some members will be active daily, others dip in when they need specific help. It's designed to fit around your schedule, not take over your calendar.",
+      ],
     },
     {
       q: 'Who else is in the network?',
-      // derived in part: "by-invitation private network for high growth sports tech founders and CEOs"
-      a: 'Founders and CEOs of high growth sports tech companies, admitted by invitation against the same criteria you would be.',
+      a: [
+        "We're being very intentional about our member admissions, selecting accomplished operators across different sports tech verticals, geographies, and business models. Everyone has met the same financial criteria you have and brings complementary expertise and perspective to the group.",
+      ],
     },
     {
       q: "What's the acceptance rate?",
-      // draft
-      a: 'We do not publish a number. Spots open at the beginning of each quarter and the cap is set by how many core groups we can facilitate properly, not by demand.',
+      a: [
+        "For now, this is invite-only. For our founding members, we want to be sure of the culture we set. As we grow our target is to accept ~10% of applicants. It's not about being elitist; it's about ensuring everyone in the network is both giving and getting tremendous value.",
+      ],
     },
     {
       q: 'How long is the membership?',
-      // draft
-      a: 'Membership runs annually and renews by choice, not by default.',
+      a: [
+        "Membership is billed annually, but Playmakers isn't designed as a one-year experiment. The real value comes from staying connected with the same group over multiple years as those relationships grow and compound over time.",
+      ],
     },
     {
       q: 'Is Playmakers a digital network or do you meet in person?',
-      // derived in part: "access the member community immediately" (step 3)
-      a: 'Both. The community and the core group sessions run digitally, which is what makes a network this senior possible across markets.',
+      a: [
+        "Both. We're building a hybrid network because real relationships require face-to-face time.",
+        "The core group sessions are virtual for practical reasons—your 6-9 member group will likely span multiple cities and time zones. Meeting monthly online keeps the commitment manageable while you're running a company.",
+        'But throughout the year, we bring the network together regularly through member dinners and events around major conferences and sporting moments, and informal regional meetups.',
+        "Think of it this way: virtual core group meetings and Playmakers' digital platform enable consistent connection and collaboration, in-person experiences are where relationships deepen and strengthen.",
+      ],
     },
     {
       q: 'Who will be in my core group?',
-      // derived: 6-9 members, curated, placed within 90 days (offer card + step 3)
-      a: 'Six to nine members at a comparable stage, curated rather than assigned. Placement happens within 90 days of joining — it is deliberate and cannot be rushed.',
+      a: [
+        "Once you join, we'll place you in a core group of 6-9 members who meet 9 times per year with a professional coach/facilitator. Everyone in your group will have met Playmaker’s membership criteria (covered in third FAQ question).",
+        "Beyond that, we curate for diversity and complementary experiences: Someone might be ahead of you in scaling sports organization clients but behind you in fundraising. Another might have navigated a major sports league partnership you're pursuing, while you've solved the international expansion they're tackling. One founder might have exited and brings perspective on what matters long-term, while another is in the same growth trenches as you.",
+        'We look at business model (B2B vs B2C, SaaS vs marketplace), core customer groups (athletes, fans, sports organization), stage, geography, and functional expertise. The goal is to create groups where everyone brings different experience but shares the same fundamental challenges.',
+        "Ultimately, the core group experience we want to provide is one where you walk away with actual answers from people who've been there, done that, sharpen your own thinking by helping others, and get honest accountability from people who understand exactly what you're up against. Not just in business, but in sustaining yourself through the journey.",
+      ],
     },
     {
       q: "What if I don't connect well with my core group?",
-      // draft
-      a: 'Tell us and we will move you. A group that does not fit is worth nothing to you and nothing to the other members in it.',
+      a: [
+        "We put a lot of thought into group composition—geography, business stage, verticals, personalities. That said, if a group isn't working, we address it quickly. The core group experience has to be exceptional, full stop.",
+      ],
     },
     {
       q: 'How do the curated introductions work? Can you help me connect with investors or potential clients?',
-      // draft
-      a: 'Introductions are made on request and only where there is a real reason for both sides to meet. We would rather make five that matter than fifty that do not.',
+      a: [
+        'Definitely. Curated introductions are central to the value we provide.',
+        "As you engage with the network, we'll actively facilitate connections that make sense for where you are: other members working on similar challenges, industry leaders we know through SportsTechX, potential clients, strategic partners, investors and so on. These happen organically all year round through our member events, participation in conferences, guest speaker sessions or direct 1-1 intros when we spot a valuable connection. This is all part of membership.",
+        "Now, if you're in active fundraising mode and need us to run a targeted investor introduction process, or you're pursuing a major business development initiative that requires intensive, dedicated support - that's different. Those are structured as separate commercial engagements. For fundraising, we work primarily on a success-based model. For major BD initiatives, we typically arrange a case-by-case agreement with a fixed fee plus success component.",
+        'The principle is simple: everyday valuable introductions that help you grow are part of the Playmakers membership experience. Deep, intensive introduction campaigns around major business milestones require additional arrangements.',
+      ],
     },
     {
       q: 'How is Playmakers different from other founder communities like Hampton, YPO, Vistage or EO?',
-      // draft
-      a: 'Those are cross-industry. This one is not — every member is building in sports tech, so the context is shared before anyone starts talking.',
+      a: [
+        'Those are all strong communities - the difference comes down to vertical focus and what that unlocks.',
+        "The sports tech founder experience is specific. You're building at the intersection of technology and sports - navigating rights holders, legacy infrastructure in sports organizations, understanding the sports calendar, and working in an industry where relationships matter as much as product. A SaaS founder building CRM software faces different challenges than someone building athlete performance tech or fan engagement platforms.",
+        'In a generalist community, you might be the only person who understands why selling to sports teams is fundamentally different, or why your roadmap is dictated by competition schedules. In Playmakers, everyone gets it immediately.',
+        '**What vertical focus gives you:**',
+        '**Pattern recognition that applies.** When someone in your core group scaled from 10 to 100 sports organization clients, their learnings transfer directly.',
+        "**Network effects that matter.** Need an intro to a Premier League club's innovation lead? Someone in the network either knows them or has navigated that conversation.",
+        '**Relevant intelligence.** Through SportsTechX and the Playmakers community, you get market data, trend insights and competitive intelligence specific to the intersection of global sports and technological innovation.',
+        "**Shared context.** The founder who closed a deal with a governing body can help you think through your approach. The person who survived pandemic's impact on live sports understands your volatility challenges.",
+        "The honest take: If you're building a business that happens to touch sports occasionally, then generalist founder communities like Hampton, YPO or Vistage or EO may be a perfect fit. If your core customers are athletes, fans or sporting organisations and you want peers who speak your language from day one - that's what we're building.",
+      ],
     },
-  ],
+  ] satisfies FaqItem[],
 };
 
 export const finalHero = {
