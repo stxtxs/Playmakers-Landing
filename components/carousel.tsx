@@ -272,7 +272,13 @@ export function Carousel({
       if (el.scrollLeft + dir * step < 0) el.scrollLeft += copy;
       else if (el.scrollLeft + dir * step > el.scrollWidth - el.clientWidth) el.scrollLeft -= copy;
     }
-    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+    // Land on an absolute card boundary, not a relative scrollBy. offsetLeft
+    // is a whole pixel while the real stride is fractional (a 1/2-width card),
+    // and Safari's snap settles where it is told, so relative steps carried
+    // the rounding forward — the testimonials crept a pixel every other step
+    // until both quotes were cut off at the edges.
+    const exact = a && b ? b.getBoundingClientRect().left - a.getBoundingClientRect().left : step;
+    el.scrollTo({ left: (Math.round(el.scrollLeft / exact) + dir) * exact, behavior: 'smooth' });
   }, [autoScroll, looping]);
 
   // Discrete auto-advance: page forward one card on a timer, pausing on
