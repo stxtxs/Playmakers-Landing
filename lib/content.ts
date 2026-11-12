@@ -318,8 +318,8 @@ export const team = {
  * Answers are the ones on joinplaymakers.co, word for word, with one deliberate
  * change: where that page names "SportsTechX Intelligence Hub" (Pro-level
  * access), this one says Atlas Raise access — the membership now includes Atlas
- * Raise, and the offer cards above say so. Prices and criteria stay in euros as
- * the source has them.
+ * Raise, and the offer cards above say so. The price stays in euros as the source
+ * has it; the join criteria are in dollars, as the How to Join cards are.
  */
 export const faq = {
   title: 'Frequently Asked Questions',
@@ -332,8 +332,8 @@ export const faq = {
         '**Member Events** – Online and in-person gatherings that go beyond surface-level networking and turn your peers into partners. From private member dinners to Playmakers hosted events around major sports tech conferences and sporting moments.',
         '**Curated Introductions** – Direct connections to other members, investors, and key sports industry stakeholders, leveraging the collective network of the core team and members.',
         '**Digital Community** – Continuous peer-to-peer exchange of best operator knowledge and strategic playbooks in sports tech. Daily access to the minds of sports tech founders and CEOs who speak your language.',
-        '**Atlas Raise Access** – SportsTechX Atlas Raise, providing actionable insights on global sports tech trends, market data, and competitive intelligence specific to the intersection of sports and technology.',
-        "In short: Core Group, Network, Intelligence. Everything designed to help you scale faster with people who get what you're building.",
+        "**Atlas Raise Access** – Your intelligence edge in sports tech fundraising. Identify relevant investors, strengthen your pitch and close your next round faster, powered by sports tech's deepest dataset",
+        "In short: Core Group, Network, Sports Tech Intelligence. Everything designed to help you scale faster with people who get what you're building.",
       ],
     },
     {
@@ -347,7 +347,7 @@ export const faq = {
       q: 'What are the requirements to join?',
       a: [
         'To join, you must:',
-        '• Meet our financial criteria for membership: €1M+ in revenue, OR €3M+ in funding, OR a previous €5M+ exit.',
+        '• Meet our financial criteria for membership: $1M+ in revenue, OR $3M+ in funding, OR a previous $5M+ exit.',
         '• Be building in sports tech — so you share the same market dynamics, customer challenges, and industry context.',
         '• Have been vetted for culture fit — specifically courtesy, discretion, and commitment to contributing to the success of fellow members in the network. We enforce a strict "no assholes" policy.',
       ],
