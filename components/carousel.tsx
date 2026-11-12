@@ -49,14 +49,17 @@ function flexItems(track: HTMLElement): HTMLElement[] {
  * crept a pixel every other step until both quotes were cut off at the edges.
  * `a`/`b` are the first two cards. Same helper as the STX landing carousel.
  */
-function cardEdge(track: HTMLElement, a: HTMLElement, b: HTMLElement | undefined, dir: 1 | -1): number {
+function cardEdge(track: HTMLElement, a: HTMLElement, b: HTMLElement | undefined, dir: 1 | -1, from = track.scrollLeft): number {
   const ra = a.getBoundingClientRect();
   const stride = b ? b.getBoundingClientRect().left - ra.left : ra.width;
   const pad = parseFloat(getComputedStyle(track).scrollPaddingLeft) || 0;
   // The scroll position at which the first card sits on the snap edge.
   const base = track.scrollLeft + ra.left - (track.getBoundingClientRect().left + pad);
-  return base + (Math.round((track.scrollLeft - base) / stride) + dir) * stride;
+  return base + (Math.round((from - base) / stride) + dir) * stride;
 }
+
+/** How long a page() target counts as "still travelling" for the next press. */
+const STEP_MS = 700;
 
 export function Carousel({
   children,
@@ -107,6 +110,10 @@ export function Carousel({
   const track = useRef<HTMLDivElement>(null);
   const paused = useRef(false);
   const resumeAt = useRef<number | null>(null);
+  // Where the last arrow press is heading. A second press during that slide
+  // continues from there; rounding the half-travelled position instead could
+  // land on the same card and swallow the press.
+  const heading = useRef<{ left: number; at: number } | null>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(true);
 
@@ -285,16 +292,24 @@ export function Carousel({
     }
 
     // autoAdvance / manual-in-a-loop: no drift loop to fold the position, so
-    // wrap BOTH directions here before scrolling.
+    // wrap BOTH directions here before scrolling — judged from where the rail
+    // is heading, so a quick second press near the end still wraps.
+    const h = heading.current;
+    let from = h && performance.now() - h.at < STEP_MS ? h.left : el.scrollLeft;
     if (looping && copy) {
-      if (el.scrollLeft + dir * step < 0) el.scrollLeft += copy;
-      else if (el.scrollLeft + dir * step > el.scrollWidth - el.clientWidth) el.scrollLeft -= copy;
+      const shift = from + dir * step < 0 ? copy : from + dir * step > el.scrollWidth - el.clientWidth ? -copy : 0;
+      if (shift) {
+        el.scrollLeft += shift;
+        from += shift;
+      }
     }
     if (!a) {
       el.scrollBy({ left: dir * step, behavior: 'smooth' });
       return;
     }
-    el.scrollTo({ left: cardEdge(el, a, b, dir), behavior: 'smooth' });
+    const left = cardEdge(el, a, b, dir, from);
+    heading.current = { left, at: performance.now() };
+    el.scrollTo({ left, behavior: 'smooth' });
   }, [autoScroll, looping]);
 
   // Discrete auto-advance: page forward one card on a timer, pausing on
