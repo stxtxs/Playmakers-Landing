@@ -221,6 +221,9 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", Helvetica, Arial, sans-serif;
   --font-label: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-bebas: var(--font-bebas-neue), "Bebas Neue", Impact, sans-serif;
+  /* Footer only, matching the sportstechx.com footer. */
+  --font-frank: "new-frank", var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-commit-mono), "Commit Mono", ui-monospace, monospace;
 
   /* No --scale-* knobs. Teko is condensed, so its 102px reads like ~70px of a
    * normal grotesque and needs no retuning; the brief is a pixel match. If that
@@ -530,43 +533,30 @@
   }
 }
 
-/* Footer "Cloud grid": the two vertical rules between the link columns.
- *
- * They are NOT full-height cell borders. On the artboard the horizontals sit at
- * y7283 and y7661 while the verticals run y7313-7631, so each is inset 30 from
- * both rules. The content box is padded 53/67, hence the negative offsets: the
- * rule has to reach back out past the padding to land 30 inside the block. */
+/* Footer rules, as on sportstechx.com: a 2px vertical before each link column,
+ * centred in the 38px gap and overhanging 22px above the column. */
 @media (width >= 64rem) {
   .footer-cell {
     position: relative;
-    padding-left: calc(57 * var(--k));
   }
 
   .footer-cell::before {
     content: "";
     position: absolute;
-    left: 0;
-    top: calc(-23 * var(--k));
-    bottom: calc(-37 * var(--k));
-    border-left: 2px solid var(--rule-2);
+    left: -20px;
+    top: -22px;
+    bottom: 0;
+    width: 2px;
+    background: rgb(from var(--rule-2) r g b / 0.5);
   }
 }
 
-/* Stacked, the same columns have nothing between them but a gap, so the block
- * reads as three loose piles of links. The verticals above cannot simply be
- * rotated: they are sized to the artboard's own 30-unit insets and they belong
- * BETWEEN columns, of which there is one here.
- *
- * A rule above each link column instead — the sibling site's mobile footer does
- * the same, and deliberately gives its brand cell none, so the mark stays the
- * top of the block rather than becoming a fourth entry in a list. Half alpha
- * because at this width the rule is a separator, not part of the artboard's
- * "Cloud grid" frame, and the full #bababa reads as heavy as the block's own
- * border-y. */
+/* Stacked, a rule above each link column instead. The brand cell gets none, so
+ * the mark stays the top of the block rather than a fourth entry in a list. */
 @media (width < 64rem) {
   .footer-cell {
     border-top: 2px solid rgb(from var(--rule-2) r g b / 0.5);
-    padding-top: calc(28 * var(--k));
+    padding-top: 26px;
   }
 }
 

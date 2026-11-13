@@ -1,4 +1,5 @@
 import { Bebas_Neue, Inter, Space_Grotesk, Teko } from 'next/font/google';
+import localFont from 'next/font/local';
 
 /**
  * The design uses four families. Counts are visible (non-whitespace) characters
@@ -45,4 +46,13 @@ export const bebasNeue = Bebas_Neue({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-bebas-neue',
+});
+
+/* Footer legal row: Commit Mono, to match the sportstechx.com footer. Not on
+   Google Fonts, so it is self-hosted (the same latin woff2 Atlas ships). */
+export const commitMono = localFont({
+  src: './fonts/commit-mono-400.woff2',
+  weight: '400',
+  display: 'swap',
+  variable: '--font-commit-mono',
 });

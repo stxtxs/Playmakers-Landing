@@ -435,7 +435,6 @@ export const finalHero = {
 export const footer = {
   description:
     'Playmakers is an invite-only, private membership network for high-growth sports tech founders and CEOs to connect, share strategy, and scale together.',
-  location: 'Berlin, Germany',
   // Same structure as the Atlas footer: this site's own links, then the rest
   // of the SportsTechX family (the first gets an outbound arrow), then Connect.
   columns: [
@@ -469,6 +468,12 @@ export const footer = {
     // hello@playmakers.com (the Figma placeholder) is a stranger's domain.
     { label: 'Contact', icon: 'icon-mail', href: 'mailto:hello@sportstechx.com' },
   ],
-  legal: '© 2026 SportsTechX GmbH. All rights reserved.',
-  meta: 'Privacy · Imprint · The Inner Circle of Sports Tech',
+  legal: '© 2026 SportsTechX GmbH · Berlin, Germany',
+  // The sportstechx.com footer's legal row. Only the membership terms live here.
+  legalLinks: [
+    { label: 'Privacy Policy', href: `${STX_HOME}/privacy-policy` },
+    { label: 'Terms of Service', href: `${STX_HOME}/terms-of-service` },
+    { label: 'Playmakers Membership Terms', href: '/terms' },
+    { label: 'Imprint', href: `${STX_HOME}/imprint` },
+  ],
 };
