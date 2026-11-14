@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { MobileMenuPanel, MobileMenuProvider, MobileMenuShell } from "@/components/mobile-menu";
+import { AnalyticsConsent } from "@/components/analytics-consent";
 import { NavBar } from "@/components/sections/nav-bar";
 import { bebasNeue, inter, spaceGrotesk, teko } from "./fonts";
 import "./globals.css";
@@ -72,6 +73,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <MobileMenuPanel />
           <MobileMenuShell nav={<NavBar />}>{children}</MobileMenuShell>
         </MobileMenuProvider>
+        {/* Google Analytics, loaded only after the visitor accepts. */}
+        <AnalyticsConsent />
       </body>
     </html>
   );

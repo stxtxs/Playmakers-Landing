@@ -116,6 +116,11 @@ export function Footer() {
               Terms of Membership
             </a>
             {' · '}
+            {/* Reopens the analytics consent banner (analytics-consent.tsx). */}
+            <a href="#cookie-settings" className="hover:underline">
+              Cookie Settings
+            </a>
+            {' · '}
             {footer.meta}
           </p>
         </div>
