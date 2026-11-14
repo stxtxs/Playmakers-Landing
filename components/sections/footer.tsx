@@ -1,5 +1,6 @@
 import { footer, STX_HOME } from '@/lib/content';
 import { Art } from '@/components/art';
+import { CookieSettingsLink } from '@/components/cookie-settings-link';
 
 /* Type and colour of the sportstechx.com footer, as it renders at 1440 wide:
    New Frank 17/31 in 70% navy, Bebas Neue 21/31 heads, Commit Mono legal row. */
@@ -106,6 +107,8 @@ export function Footer() {
                 </a>
               </span>
             ))}
+            <span aria-hidden> · </span>
+            <CookieSettingsLink className="cursor-pointer transition-colors duration-[80ms] ease-out hover:text-black" />
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { MobileMenuPanel, MobileMenuProvider, MobileMenuShell } from "@/components/mobile-menu";
 import { Analytics } from "@/components/analytics";
+import { CookieBanner } from "@/components/cookie-banner";
 import { NavBar } from "@/components/sections/nav-bar";
 import { bebasNeue, commitMono, inter, spaceGrotesk, teko } from "./fonts";
 import "./globals.css";
@@ -73,7 +74,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <MobileMenuPanel />
           <MobileMenuShell nav={<NavBar />}>{children}</MobileMenuShell>
         </MobileMenuProvider>
-        {/* PostHog web analytics, cookieless. */}
+        <CookieBanner />
+        {/* PostHog web analytics, only after "Accept all" in the cookie banner. */}
         <Analytics />
       </body>
     </html>
