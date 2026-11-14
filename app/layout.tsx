@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { MobileMenuPanel, MobileMenuProvider, MobileMenuShell } from "@/components/mobile-menu";
 import { Analytics } from "@/components/analytics";
+import { CookieBanner } from "@/components/cookie-banner";
 import { NavBar } from "@/components/sections/nav-bar";
-import { bebasNeue, inter, spaceGrotesk, teko } from "./fonts";
+import { bebasNeue, commitMono, inter, spaceGrotesk, teko } from "./fonts";
 import "./globals.css";
 
 /** The public origin. */
@@ -52,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${teko.variable} ${inter.variable} ${spaceGrotesk.variable} ${bebasNeue.variable} h-full antialiased`}
+      className={`${teko.variable} ${inter.variable} ${spaceGrotesk.variable} ${bebasNeue.variable} ${commitMono.variable} h-full antialiased`}
     >
       <head>
         {/* Adobe Fonts kit jyx6vei (New Frank), shared with sportstechx.com and
@@ -73,7 +74,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <MobileMenuPanel />
           <MobileMenuShell nav={<NavBar />}>{children}</MobileMenuShell>
         </MobileMenuProvider>
-        {/* PostHog web analytics, cookieless. */}
+        <CookieBanner />
+        {/* PostHog web analytics, only after "Accept all" in the cookie banner. */}
         <Analytics />
       </body>
     </html>
