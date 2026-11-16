@@ -54,6 +54,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      // The announcement pre-paint script may set data-announce-off on <html> before React loads.
+      suppressHydrationWarning
       className={`${teko.variable} ${inter.variable} ${spaceGrotesk.variable} ${bebasNeue.variable} ${commitMono.variable} h-full antialiased`}
     >
       <head>
