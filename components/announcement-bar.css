@@ -18,7 +18,7 @@ html[data-announce-off] .announce { display: none; }
 .announce__cta {
   display: inline-flex; align-items: center; height: 30px; padding: 0 16px; flex-shrink: 0;
   border-radius: 999px; background: #fff; color: #091539; text-decoration: none;
-  font-family: var(--font-space-grotesk), ui-monospace, monospace; font-size: 12px; letter-spacing: 0.06em;
+  font-family: var(--font-commit-mono), ui-monospace, monospace; font-size: 12px; letter-spacing: 0.06em;
   transition: background-color 0.2s ease-out, color 0.2s ease-out, scale 0.2s ease-out;
 }
 .announce__cta:hover { background: #ff5c8a; color: #fff; }
