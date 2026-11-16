@@ -107,6 +107,15 @@
    * fold mid-line — a fixed 82svh did exactly that once the lead grew a line. */
   --hero-peek: calc(86 * var(--k) + max(35px, calc(65.3 * var(--k))) + 2 * max(23.7px, calc(31.1 * var(--k))));
 
+  /* Extra room under the hero's "Apply for Membership" (feedback Nov 2026: double
+   * the space below it). The hero centres its content, so the gap under the
+   * button was (hero height - 88 top padding - 423 content) / 2 artboard px; the
+   * hero grows by exactly that and puts it all at the bottom, so the gap doubles
+   * and nothing above it moves. 0 when the content already fills the hero, and
+   * on short screens (below). Re-measure 423 if the wordmark, headline or button
+   * change size. */
+  --hero-air: max(0px, calc((100svh - var(--hero-peek) - 511 * var(--k)) / 2));
+
   /* ── the scale model ──
    * ONE artboard exists: 1512 wide. Everything on it is drawn in artboard
    * pixels, and the whole composition should keep its proportions at any
@@ -179,7 +188,7 @@
   .page-rig { --hero-peek: calc(86 * var(--k) + max(35px, calc(65.3 * var(--k))) + 3 * max(23.7px, calc(31.1 * var(--k)))); }
 }
 @media (max-height: 759.98px) {
-  .page-rig { --hero-peek: 0px; }
+  .page-rig { --hero-peek: 0px; --hero-air: 0px; }
 }
 
 /* Below the desktop layout the page stops being a scale drawing.
