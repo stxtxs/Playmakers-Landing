@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { MobileMenuPanel, MobileMenuProvider, MobileMenuShell } from "@/components/mobile-menu";
 import { NavBar } from "@/components/sections/nav-bar";
+import { AnnouncementBar, ANNOUNCE_PREPAINT } from "@/components/announcement-bar";
 import { bebasNeue, inter, spaceGrotesk, teko } from "./fonts";
 import "./globals.css";
 
@@ -60,6 +61,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
         <link rel="preconnect" href="https://p.typekit.net" crossOrigin="" />
         <link rel="stylesheet" href="https://use.typekit.net/jyx6vei.css" />
+        {/* Before paint: an announcement this visitor already closed stays hidden (no flash). */}
+        <script dangerouslySetInnerHTML={{ __html: ANNOUNCE_PREPAINT }} />
       </head>
       {/* --k is what makes the page a scale drawing of the 1512 artboard.
           It needs two elements, not one: the body is the query container and
@@ -70,7 +73,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             `fixed` would resolve against the shell's transform. */}
         <MobileMenuProvider>
           <MobileMenuPanel />
-          <MobileMenuShell nav={<NavBar />}>{children}</MobileMenuShell>
+          <MobileMenuShell nav={<NavBar />}>
+            {/* Top of every page until closed; the nav sits below it. */}
+            <AnnouncementBar />
+            {children}
+          </MobileMenuShell>
         </MobileMenuProvider>
       </body>
     </html>

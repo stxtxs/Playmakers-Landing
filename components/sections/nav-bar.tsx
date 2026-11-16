@@ -30,8 +30,12 @@ const subscribe = (onChange: () => void) => {
  * releasing at 8 gives it somewhere to settle.
  */
 let docked = false;
+/** The announcement banner's height / on-screen part (components/announcement-bar.tsx; 0 once closed). */
+const bannerVar = (name: '--announce-h' | '--announce-vis') =>
+  parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
 const isScrolled = () => {
-  const y = window.scrollY;
+  // Measured past the banner, so the glass band never docks over a banner still on screen.
+  const y = window.scrollY - bannerVar('--announce-h');
   if (y > 24) docked = true;
   else if (y < 8) docked = false;
   return docked;
@@ -65,7 +69,8 @@ export function NavBar() {
       // ancestor becomes the containing block for `fixed` children — a fixed
       // bar would then pin to the top of the *document* and scroll away,
       // taking the close button with it. Anchor to the captured offset.
-      style={drawerOpen ? { top: lockedY } : undefined}
+      // (+ the banner still on screen at that point, so the bar stays below it.)
+      style={drawerOpen ? { top: lockedY + bannerVar('--announce-vis') } : undefined}
       className={cn(
         'inset-x-0 z-50',
         // background-IMAGE, not background-color: the scrim is a gradient, so
@@ -82,7 +87,8 @@ export function NavBar() {
         // bug; its pages are just short enough to hide it.)
         'transition-[translate,padding,background-image,backdrop-filter] duration-300',
         drawerOpen ? 'absolute' : 'fixed',
-        'top-0',
+        // Below the announcement banner while it is on screen (0 once it scrolls away or is closed).
+        'top-[var(--announce-vis,0px)]',
         // The docked glass is suppressed while the drawer is out, or it paints
         // a translucent strip across the top of the slid page.
         scrolled && !drawerOpen
