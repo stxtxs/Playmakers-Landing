@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Playmakers',
     short_name: 'Playmakers',
-    description: 'The inner circle of sports tech.',
+    description: 'Where sports tech’s best build smarter, faster, together.',
     id: SITE_URL,
     start_url: '/',
     display: 'standalone',
