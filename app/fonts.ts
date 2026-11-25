@@ -1,5 +1,9 @@
-import { Bebas_Neue, Inter, Space_Grotesk, Teko } from 'next/font/google';
 import localFont from 'next/font/local';
+
+/* Self-hosted latin woff2s (next/font/local), NOT next/font/google: the Google loader
+   downloads from fonts.gstatic.com AT BUILD TIME and that fetch flakes on cold Vercel
+   builds, failing the deploy (it broke the Atlas client and admin). Re-download from the
+   Google Fonts CSS2 API, latin block, if a face ever needs refreshing. */
 
 /**
  * The design uses four families. Counts are visible (non-whitespace) characters
@@ -18,32 +22,34 @@ import localFont from 'next/font/local';
  * intent. None of the three are loaded here; adding them would cost three font
  * downloads to render nothing. See app/globals.css for where each family lands.
  *
- * All four are variable fonts except Bebas Neue, so only Bebas takes a `weight`.
- * Passing `weight` to a variable font pins it to static instances and downloads
- * more than the single variable file.
+ * All four are variable fonts except Bebas Neue: each variable face is one file,
+ * declared with its weight range.
  */
 
-export const teko = Teko({
-  subsets: ['latin'],
+export const teko = localFont({
+  src: './fonts/teko.woff2',
+  weight: '300 700',
   display: 'swap',
   variable: '--font-teko',
 });
 
-export const inter = Inter({
-  subsets: ['latin'],
+export const inter = localFont({
+  src: './fonts/inter.woff2',
+  weight: '100 900',
   display: 'swap',
   variable: '--font-inter',
 });
 
-export const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
+export const spaceGrotesk = localFont({
+  src: './fonts/space-grotesk.woff2',
+  weight: '300 700',
   display: 'swap',
   variable: '--font-space-grotesk',
 });
 
-export const bebasNeue = Bebas_Neue({
+export const bebasNeue = localFont({
+  src: './fonts/bebas-neue-400.woff2',
   weight: '400',
-  subsets: ['latin'],
   display: 'swap',
   variable: '--font-bebas-neue',
 });
